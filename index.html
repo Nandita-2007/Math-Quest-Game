@@ -681,37 +681,30 @@
                     }
                     break;
                     
-                case '×':
-                    num1 = Math.floor(Math.random() * maxNum) + 1;
-                    num2 = Math.floor(Math.random() * maxNum) + 1;
-                    result = num1 * num2;
-                    
-                    if (missingPosition === 'result') {
-                        answer = result;
-                    } else if (missingPosition === 'left') {
-                        answer = num1;
-                        [num1, result] = [result, num1];
-                    } else {
-                        answer = num2;
-                        [num2, result] = [result, num2];
-                    }
-                    break;
-                    
-                case '÷':
-                    num2 = Math.floor(Math.random() * maxNum) + 1;
-                    result = Math.floor(Math.random() * maxNum) + 1;
-                    num1 = num2 * result;
-                    
-                    if (missingPosition === 'result') {
-                        answer = result;
-                    } else if (missingPosition === 'left') {
-                        answer = num1;
-                        [num1, result] = [result, num1];
-                    } else {
-                        answer = num2;
-                        [num2, result] = [result, num2];
-                    }
-                    break;
+                case '×': {
+  num1 = Math.floor(Math.random() * maxNum) + 1;
+  num2 = Math.floor(Math.random() * maxNum) + 1;
+  result = num1 * num2;
+
+  if (missingPosition === 'left') answer = num1;
+  else if (missingPosition === 'right') answer = num2;
+  else answer = result;
+
+  break;
+}
+
+case '÷': {
+  // Ensure integer division: num1 ÷ num2 = result
+  num2 = Math.floor(Math.random() * maxNum) + 1;
+  result = Math.floor(Math.random() * maxNum) + 1;
+  num1 = num2 * result;
+
+  if (missingPosition === 'left') answer = num1;     // dividend
+  else if (missingPosition === 'right') answer = num2; // divisor
+  else answer = result;                               // quotient
+
+  break;
+}
             }
             
             // Build question text
@@ -1270,4 +1263,5 @@
     </script>
 </body>
 </html>
+
 
